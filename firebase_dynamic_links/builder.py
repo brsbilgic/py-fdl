@@ -3,8 +3,8 @@ from urllib.parse import urlencode, unquote
 from .client import FirebaseClient
 
 
-def generate_short_link(client, app_code, query_params):
-    long_dynamic_link = generate_long_link(app_code=app_code, query_params=query_params, unquoted=client.unquoted)
+def generate_short_link(client, app_code, query_params, unquoted=False):
+    long_dynamic_link = generate_long_link(app_code=app_code, query_params=query_params, unquoted=unquoted)
 
     return client.shorten_link(long_link=long_dynamic_link)
 
@@ -28,7 +28,7 @@ class DynamicLinkBuilder:
         return generate_long_link(app_code=app_code, query_params=kwargs)
 
     def generate_short_link(self, app_code, **kwargs):
-        return generate_short_link(client=self.client, app_code=app_code, query_params=kwargs)
+        return generate_short_link(client=self.client, app_code=app_code, query_params=kwargs, unquoted=False)
 
 
 def dynamic_link_builder(api_key):
