@@ -4,7 +4,7 @@ from .client import FirebaseClient
 
 
 def generate_short_link(client, app_code, query_params):
-    long_dynamic_link = generate_long_link(app_code=app_code, query_params=query_params)
+    long_dynamic_link = generate_long_link(app_code=app_code, query_params=query_params, unquoted=client.unquoted)
 
     return client.shorten_link(long_link=long_dynamic_link)
 
@@ -20,8 +20,9 @@ def generate_long_link(app_code, query_params, unquoted=False):
 
 
 class DynamicLinkBuilder:
-    def __init__(self, client):
+    def __init__(self, client, unquoted=False):
         self.client = client
+        self.unquoted = unquoted
 
     def generate_long_link(self, app_code, **kwargs):
         return generate_long_link(app_code=app_code, query_params=kwargs)
