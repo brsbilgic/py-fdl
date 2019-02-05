@@ -27,8 +27,8 @@ class DynamicLinkBuilder:
     def generate_long_link(self, app_code, **kwargs):
         return generate_long_link(app_code=app_code, query_params=kwargs)
 
-    def generate_short_link(self, app_code, **kwargs):
-        return generate_short_link(client=self.client, app_code=app_code, query_params=kwargs, unquoted=False)
+    def generate_short_link(self, app_code, unquoted=False, **kwargs):
+        return generate_short_link(client=self.client, app_code=app_code, query_params=kwargs, unquoted=unquoted)
 
 
 def dynamic_link_builder(api_key):
